@@ -18,9 +18,13 @@ public class LicznikHandling extends ViewModel {
     }
 
     public void setLicznik(int naCoZmienic) {
-        if (licznik.getValue() == null || licznik.getValue() != naCoZmienic) {
+        if (licznik.getValue() != naCoZmienic) {
             licznik.setValue(naCoZmienic);
         }
+        if (licznik.getValue() == null){
+            licznik.setValue(0);
+        }
+
     }
     public void dodajDoLicznika(int ileDodac){
         if(licznik.getValue()!=null){

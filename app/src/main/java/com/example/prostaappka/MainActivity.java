@@ -16,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     Button dodaj,odejmij,wylosuj;
     EditText wpiszNumer;
@@ -45,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         licznikHandling.getLicznik().observe(this, integerObserver);
+        wylosuj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Random random = new Random();
+                int randomNumber = random.nextInt(99) + 1;
+                licznikHandling.setLicznik(randomNumber);
+            }
+        });
         dodaj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         odejmij.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         wpiszNumer.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable editable) {
-                licznikHandling.setLicznik(Integer.valueOf(wpiszNumer.getText().toString()));
+
             }
 
             @Override
@@ -72,7 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                if (wpiszNumer.length() != 0) {
+                    licznikHandling.setLicznik(Integer.valueOf(wpiszNumer.getText().toString()));
+                }
+                else {
+                    licznikHandling.setLicznik(0);
+                }
             }
         });
     }
